@@ -18,6 +18,11 @@
     dest: "{{ home }}/.oh-my-zsh"
   when: not ohmyzsh_check.stat.exists
 
+- name: Installing powerline10k theme for oh-my-zsh from git
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ home }}/powerlevel10k"
+
 - name: Installing zshrc
   ansible.builtin.copy:
     src: files/zshrc
