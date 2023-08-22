@@ -1,0 +1,10 @@
+---
+- name: Operating System
+  debug:
+    msg:
+      "Operating System Type   ": "{{ ansible_distribution }}"
+      "Operating System Version": "{{ ansible_distribution_major_version }}"
+
+- name: Run MacOSX Tasks
+  import_tasks: macosx.yml
+  when: (ansible_distribution == "MacOSX")

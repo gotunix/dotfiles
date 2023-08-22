@@ -1,0 +1,66 @@
+---
+- name: Ensure homebrew is installed
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check
+  tags: ['always']
+
+- name: Installing homebrew
+  ansible.builtin.shell: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  tags: ['always']
+  when: not homebrew_check.stat.exists
+
+- name: Updating homebrew
+  homebrew:
+    update_homebrew: true
+  tags: ['always']
+  when: homebrew_check.stat.exists
+
+- name: Upgrade homebrew packages
+  homebrew:
+    upgrade_all: true
+  tags: ['always']
+  when: homebrew_check.stat.exists
+
+- name: Installing homebrew cask packages
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  register: result
+  until: result is successful
+  when: homebrew_check.stat.exists
+  tags: ['never', 'cask']
+  with_items:
+    - docker
+    - google-chrome
+    - google-drive
+    - google-hangouts
+    - iterm2
+    - slack
+    - visual-studio-code
+
+- name: Installing homebrew packages
+  homebrew:
+    name: "{{ item }}"
+    state: present
+  register: result
+  until: result is successful
+  tags: ['always', 'packages']
+  when: homebrew_check.stat.exists
+  with_items:
+    - autoconf
+    - docker-compose
+    - git
+    - nano
+    - nvim
+    - vim
+    - docker
+    - wget
+    - htop
+    - bpytop
+    - kubectl
+    - helm
+    - terraform
+    - tmux
+    - mosh
+
