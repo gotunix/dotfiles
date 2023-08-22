@@ -127,6 +127,8 @@ alias k='kubectl'
 alias kget='kubectl get'
 
 # Git Aliases
+alias gadd='git add -A'
+alias grm='git rm'
 alias gclone='git clone'
 alias gpull='git pull'
 alias gcheckout='git checkout'
