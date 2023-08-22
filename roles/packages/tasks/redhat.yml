@@ -11,10 +11,7 @@
     - tmux
     - nano
     - vim
-    - nvim
     - curl
     - wget
-    - docker
-    - docker-compose
     - git
   tags: ['always', 'packages']
