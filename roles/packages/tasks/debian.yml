@@ -1,0 +1,20 @@
+---
+- name: Install Debian packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  become: true
+  become_user: root
+  become_method: sudo
+  with_items:
+    - zsh
+    - tmux
+    - rsync
+    - rdiff-backup
+    - mtr
+    - htop
+    - bpytop
+    - nvim
+    - vim
+    - nano
+  tags: ['always', 'packages']

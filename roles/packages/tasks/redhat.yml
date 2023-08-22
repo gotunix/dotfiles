@@ -1,0 +1,20 @@
+---
+- name: Install Packages for RedHat
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  become: true
+  become_user: root
+  become_method: sudo
+  with_items:
+    - zsh
+    - tmux
+    - nano
+    - vim
+    - nvim
+    - curl
+    - wget
+    - docker
+    - docker-compose
+    - git
+  tags: ['always', 'packages']
