@@ -1,0 +1,18 @@
+---
+- name: Basic usage
+  ansible.builtin.debug:
+    msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
+
+- name: Setting Facts
+  ansible.builtin.set_fact:
+    home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+
+- name: Installing zshrc
+  ansible.builtin.copy:
+    src: files/zshrc
+    dest: "{{ home }}/.zshrc"
+
+- name: Installing p10k.zsh
+  ansible.builtin.copy:
+    src: files/p10k.zsh
+    dest: "{{ home }}/.p10k.zsh"

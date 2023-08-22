@@ -1,0 +1,9 @@
+---
+- name: Setting Facts
+  ansible.builtin.set_fact:
+    home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+
+- name: Installing vimrc
+  ansible.builtin.copy:
+    src: files/vimrc
+    dest: "{{ home }}/.vimrc"
