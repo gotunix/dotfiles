@@ -133,6 +133,7 @@ alias gpull='git pull'
 alias gcheckout='git checkout'
 alias gcommit='git commit -a'
 alias gbranch='git branch'
+alias gtag='git tag'
 alias gpush='git push origin'
 
 # Misc
@@ -161,6 +162,7 @@ function zhelp () {
     echo "- gcheckout - git checkout <branch>"
     echo "- gcommit   - git commit -a"
     echo "- gbranch   - git branch <branch_name>"
+    echo "- gtag      - git tag <tag_name>"
     echo "- gpush     - git push origin <branch>"
 }
 
