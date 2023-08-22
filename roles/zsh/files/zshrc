@@ -132,7 +132,7 @@ alias grm='git rm'
 alias gclone='git clone'
 alias gpull='git pull'
 alias gcheckout='git checkout'
-alias gcommit='git commit -a -m'
+alias gcommit='git commit -a'
 alias gbranch='git branch'
 alias gpush='git push origin'
 
