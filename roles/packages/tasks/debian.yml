@@ -14,7 +14,7 @@
     - mtr
     - htop
     - bpytop
-    - nvim
+    - neovim
     - vim
     - nano
   tags: ['always', 'packages']
