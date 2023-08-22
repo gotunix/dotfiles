@@ -115,6 +115,7 @@ alias tn='tmux new-session -s'
 alias td='tmux detach -s'
 
 # Docker Aliases
+alias d='docker'
 alias dnode='docker node'
 alias dservice='docker service'
 alias dserviceupdate='docker service update --force'
