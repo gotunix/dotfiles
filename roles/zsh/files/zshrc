@@ -118,7 +118,6 @@ alias td='tmux detach -s'
 alias d='docker'
 alias dnode='docker node'
 alias dservice='docker service'
-alias dserviceupdate='docker service update --force'
 alias ddrain='docker node update --availability drain'
 alias dactive='docker node update --availability active'
 
@@ -136,5 +135,34 @@ alias gcommit='git commit -a'
 alias gbranch='git branch'
 alias gpush='git push origin'
 
- # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# Misc
+alias zhelp=zhelp
+
+function zhelp () {
+    echo "Tmux Aliases:"
+    echo "- tls       -  tmux list-sessions"
+    echo "- ta        -  tmux attach -t"
+    echo "- tn        -  tmux new-session -s"
+    echo "- td        -  tmux detach -s"
+    echo "Docker Aliases:"
+    echo "- d         -  docker <arguments>"
+    echo "- dnode     -  docker node  <arguments>"
+    echo "- dservice  -  docker service <name>"
+    echo "- ddrain    -  docker node update --availability drain <node_name>"
+    echo "- dactive   -  docker node update --availability active <node_name"
+    echo "Kubernetes Aliases:"
+    echo "- k         -  kubectl <arguments>"
+    echo "- kget      -  kubectl get <arguments>"
+    echo "Git Aliases:"
+    echo "- gadd      - git add -A <file/dir>"
+    echo "- grm       - git rm <file/dir>"
+    echo "- gclone    - git clone <url>"
+    echo "- gpull     - git pull"
+    echo "- gcheckout - git checkout <branch>"
+    echo "- gcommit   - git commit -a"
+    echo "- gbranch   - git branch <branch_name>"
+    echo "- gpush     - git push origin <branch>"
+}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
