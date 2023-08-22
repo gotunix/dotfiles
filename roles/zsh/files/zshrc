@@ -107,44 +107,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#export KUBECONFIG=${HOME}/.kube/development:${HOME}/.kube/production
+
+# Tmux Aliases
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
 alias tn='tmux new-session -s'
 alias td='tmux detach -s'
-alias docker_l='docker --tls --tlscacert=/Users/jovens/.docker/certs/onprem/ca.pem 
---tlscert=/Users/jovens/.docker/certs/onprem/client-cert.pem --tlskey=/Users/jovens/.docker/certs/onprem/client-key.pem'
-alias docker_r='docker --tls --tlscacert=/Users/jovens/.docker/certs/digital_ocean/ca.pem 
---tlscert=/Users/jovens/.docker/certs/digital_ocean/client-cert.pem --tlskey=/Users/jovens/.docker/certs/digital_ocean/client-key.pem'
-alias docker_b='docker --tls --tlscacert=/Users/jovens/.docker/certs/onprem/ca.pem 
---tlscert=/Users/jovens/.docker/certs/onprem/client-cert.pem --tlskey=/Users/jovens/.docker/certs/onprem/client-key.pem -H 
-tcp://192.168.0.2:2376'
-alias gcm=git_push
-alias symfony="/Users/jovens/.symfony5/bin/symfony"
-alias n='/opt/homebrew/bin/nano'
-alias kcp=kube_prd
-alias kcd=kube_dev
-alias nano='/opt/homebrew/bin/nano'
 
+# Docker Aliases
 
-DOCKER_CMD="docker --tls --tlscacert=/Users/jovens/.docker/certs/onprem/ca.pem --tlscert=/Users/jovens/.docker/certs/onprem/client-cert.pem 
---tlskey=/Users/jovens/.docker/certs/onprem/client-key.pem "
+# Kubernetes Aliases
 
-function git_push () {
-    git add -A .
-    git commit -a
-    git push origin main
-}
-
-function kube_prd () {
-    echo "Swaping to production kube config"
-    export KUBECONFIG=${HOME}/.kube/production/config
-}
-
-function kube_dev () {
-    echo "Swaping to development kube config"
-    export KUBECONFIG=${HOME}/.kube/development/config
-}
+# Git Aliases
 
  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

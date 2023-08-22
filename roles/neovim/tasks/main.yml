@@ -1,0 +1,14 @@
+---
+- name: Setting Facts
+  ansible.builtin.set_fact:
+    home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+
+- name: Remove existing nvim configuration
+  ansible.builtin.file:
+    dest: "{{ home }}/.config/nvim"
+    state: absent
+
+- name: Download nvim-basic-ide from git
+  ansible.builtin.git:
+    repo: https://github.com/LunarVim/nvim-basic-ide.git
+    dest: "{{ home }}/.config/nvim"

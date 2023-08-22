@@ -1,0 +1,41 @@
+---
+- name: Setting Facts
+  ansible.builtin.set_fact:
+    home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+
+- name: Create directories
+  ansible.builtin.file:
+    name: "{{home }}/{{ item }}"
+    state: directory
+  with_items:
+    - .tmux
+    - .tmux/plugins
+
+- name: Downloading tmux-tpm plugin from git
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ home }}/.tmux/plugins/tpm"
+
+- name: Downloading tmux-sensible plugin from git
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-sensible.git
+    dest: "{{ home }}/.tmux/plugins/tmux-sensible"
+
+- name: Downloading catppuccin theme from git
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/tmux.git
+    dest: "{{ home }}/.tmux/plugins/catppuccin-tmux"
+
+- name: Installing tmux.conf (MacOSX)
+  ansible.builtin.copy:
+    src: files/tmux-macosx.conf
+    dest: "{{ home }}/.tmux.conf"
+  when: (ansible_distribution == "MacOSX")
+
+- name: Installing tmux.conf (Linux)
+  ansible.builtin.copy:
+    src: files/tmux-linux.conf
+    dest: "{{ home }}/.tmux.conf"
+  when: (ansible_distribution == "Debian" or
+         ansible_distribution == "RedHat")
+

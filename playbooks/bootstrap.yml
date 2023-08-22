@@ -9,3 +9,5 @@
     - ../roles/packages
     - ../roles/zsh
     - ../roles/vim
+    - ../roles/tmux
+    - ../roles/neovim
