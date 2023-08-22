@@ -115,10 +115,23 @@ alias tn='tmux new-session -s'
 alias td='tmux detach -s'
 
 # Docker Aliases
+alias dnode='docker node'
+alias dservice='docker service'
+alias dserviceupdate='docker service update --force'
+alias ddrain='docker node update --availability drain'
+alias dactive='docker node update --availability active'
 
 # Kubernetes Aliases
+alias k='kubectl'
+alias kget='kubectl get'
 
 # Git Aliases
+alias gclone='git clone'
+alias gpull='git pull'
+alias gcheckout='git checkout'
+alias gcommit='git commit -a -m'
+alias gbranch='git branch'
+alias gpush='git push origin'
 
  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
