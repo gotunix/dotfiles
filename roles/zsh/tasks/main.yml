@@ -28,7 +28,6 @@
     src: files/zshrc
     dest: "{{ home }}/.zshrc"
 
-- name: Installing p10k.zsh
-  ansible.builtin.copy:
-    src: files/p10k.zsh
-    dest: "{{ home }}/.p10k.zsh"
+- name: Enable powerlin10k theme
+  ansible.builtin.command: "echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>{{ home }}/.zshrc"
+
