@@ -29,5 +29,6 @@
     dest: "{{ home }}/.zshrc"
 
 - name: Enable powerlin10k theme
-  ansible.builtin.command: "echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>{{ home }}/.zshrc"
+  ansible.builtin.shell: >
+    echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>{{ home }}/.zshrc
 
