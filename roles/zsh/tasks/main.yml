@@ -1,0 +1,32 @@
+---
+- name: Basic usage
+  ansible.builtin.debug:
+    msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
+
+- name: Checking for previous installation of oh-my-zsh
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: zsh_ohmyzsh_check
+
+- name: Installing oh-my-zsh from git  # noqa latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh"
+  when: not zsh_ohmyzsh_check.stat.exists
+
+- name: Installing powerline10k theme for oh-my-zsh from git  # noqa latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ansible_user_dir }}/powerlevel10k"
+
+- name: Installing zshrc
+  ansible.builtin.copy:
+    src: files/zshrc
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    mode: '0644'
+
+- name: Enable powerlevel10k theme
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_user_dir }}/.zshrc"
+    line: 'source ~/powerlevel10k/powerlevel10k.zsh-theme'
+    state: present

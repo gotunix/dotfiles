@@ -1,0 +1,18 @@
+---
+- name: Operating System
+  ansible.builtin.debug:
+    msg:
+      "Operating System Type   ": "{{ ansible_distribution }}"
+      "Operating System Version": "{{ ansible_distribution_major_version }}"
+
+- name: Run MacOSX Tasks
+  ansible.builtin.import_tasks: macosx.yml
+  when: (ansible_distribution == "MacOSX")
+
+- name: Run Debian Tasks
+  ansible.builtin.import_tasks: debian.yml
+  when: (ansible_distribution == "Debian")
+
+- name: Run RedHat Tasks
+  ansible.builtin.import_tasks: redhat.yml
+  when: (ansible_distribution == "RedHat")

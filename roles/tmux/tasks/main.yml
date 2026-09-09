@@ -1,0 +1,39 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    name: "{{ ansible_user_dir }}/{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - .tmux
+    - .tmux/plugins
+
+- name: Downloading tmux-tpm plugin from git  # noqa latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
+
+- name: Downloading tmux-sensible plugin from git  # noqa latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-sensible.git
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tmux-sensible"
+
+- name: Downloading catppuccin theme from git  # noqa latest[git]
+  ansible.builtin.git:
+    repo: https://github.com/catppuccin/tmux.git
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/catppuccin-tmux"
+
+- name: Installing tmux.conf (MacOSX)
+  ansible.builtin.copy:
+    src: files/tmux-macosx.conf
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    mode: '0644'
+  when: (ansible_distribution == "MacOSX")
+
+- name: Installing tmux.conf (Linux)
+  ansible.builtin.copy:
+    src: files/tmux-linux.conf
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    mode: '0644'
+  when: (ansible_distribution == "Debian" or
+         ansible_distribution == "RedHat")

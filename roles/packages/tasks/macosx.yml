@@ -1,0 +1,66 @@
+---
+- name: Ensure homebrew is installed
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: packages_homebrew_check
+  tags: ['always']
+
+- name: Installing homebrew
+  ansible.builtin.shell: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  changed_when: not packages_homebrew_check.stat.exists
+  tags: ['always']
+  when: not packages_homebrew_check.stat.exists
+
+- name: Updating homebrew
+  community.general.homebrew:
+    update_homebrew: true
+  tags: ['always']
+  when: packages_homebrew_check.stat.exists
+
+- name: Upgrade homebrew packages
+  community.general.homebrew:
+    upgrade_all: true
+  tags: ['always']
+  when: packages_homebrew_check.stat.exists
+
+- name: Installing homebrew cask packages
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  register: packages_result
+  until: packages_result is successful
+  when: packages_homebrew_check.stat.exists
+  tags: ['never', 'cask']
+  with_items:
+    - docker
+    - google-chrome
+    - google-drive
+    - google-hangouts
+    - iterm2
+    - slack
+    - visual-studio-code
+
+- name: Installing homebrew packages
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  register: packages_result
+  until: packages_result is successful
+  tags: ['always', 'packages']
+  when: packages_homebrew_check.stat.exists
+  with_items:
+    - autoconf
+    - docker-compose
+    - git
+    - nano
+    - nvim
+    - vim
+    - docker
+    - wget
+    - htop
+    - bpytop
+    - kubectl
+    - helm
+    - terraform
+    - tmux
+    - mosh

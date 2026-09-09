@@ -1,0 +1,14 @@
+---
+- name: Bootstrapping Device
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  tasks:
+    - name: Ping localhost
+      ansible.builtin.ping:
+  roles:
+    - packages
+    - zsh
+    - vim
+    - tmux
+    - neovim

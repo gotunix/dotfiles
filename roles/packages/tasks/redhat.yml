@@ -1,0 +1,17 @@
+---
+- name: Install Packages for RedHat
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  become: true
+  become_user: root
+  become_method: ansible.builtin.sudo
+  with_items:
+    - zsh
+    - tmux
+    - nano
+    - vim
+    - curl
+    - wget
+    - git
+  tags: ['always', 'packages']
